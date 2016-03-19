@@ -1,22 +1,33 @@
-$(document).ready(function(){
+jQuery(document).ready(function(){
 	spellInit('textarea', 20);
+
+
+	var button = jQuery('.mentions div').closest('button');
+	spellInit('.mentions div', 20, button);
+
+
+
 });
 
 
-function spellInit(selector, thresholdPercent) {
+function spellInit(selector, thresholdPercent, button) {
 	appendSpellWarning(selector);
 	var threshold = thresholdPercent;
 	var isTimeouting = false;
-	
+	var customButton = button || false;
 
-	$(document).on('input propertychange', selector, function(){
+	jQuery(document).on('keydown', selector, function(){
 		if (isTimeouting === false) {
 		startTimeout(2000);
 		var that = this;
 		var $this = $(this);
-		var $submit = $this.closest('form').find('input[type="submit"]');
+		if (customButton === false) {
+			var $submit = $this.closest('form').find('input[type="submit"]');
+		} else {
+			var $submit = button;
+		}
 		var content = $this.val();
-			$.ajax({
+			jQuery.ajax({
 				method: 'POST',
 				url: 'spellchecker.php',
 					data: {
@@ -25,10 +36,7 @@ function spellInit(selector, thresholdPercent) {
 					success: function(data){
 						var response = data;
 						var response = JSON.parse(data);
-
-						console.log(response.all_words_count);
 						var currentErrorPercent = calcPercent(response);
-
 						var isSubmitAllowed = checkResult(currentErrorPercent);
 						// Decide if should allow submit
 						if(isSubmitAllowed) {
@@ -51,7 +59,7 @@ function spellInit(selector, thresholdPercent) {
 	}
 
 	function appendSpellWarning(selector) {
-		var element = $('<div>', {
+		var element = jQuery('<div>', {
 			'text': "There are no errors, you may post.",
 			'class': "spellWarning"
 		}).insertAfter(selector);
