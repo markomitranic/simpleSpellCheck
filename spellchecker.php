@@ -19,8 +19,9 @@ function prepare_text_to_check($text){
 
 function check_in_dict($words, $dict, $original) {
 	$counter = 0;
+	$words_longer_than_three = 0;
 	foreach ($words as $word) {
-
+		if (strlen($word) > 3) { $words_longer_than_three++; }
 		if (!in_array(strtolower($word), $dict) && strlen($word) > 3){
 			$counter++;
 			$wrong_words[] = $word;
@@ -32,6 +33,7 @@ function check_in_dict($words, $dict, $original) {
 	return [
 		//'counter' => $counter,
 		'wrong_words' => $wrong_words, //ne treba nam
+		// 'words_count' => $words_longer_than_three, // ukupan broj reci duzih od 3 karaktera
 		'all_words_count' => count($words), // ukupan broj reci
 		// 'allow_to_submit' => ($counter) ? false : true,
 		// 'corrected_text' => $original //ako zelimo da podvlacimo reci
