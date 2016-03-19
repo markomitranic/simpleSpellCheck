@@ -29,7 +29,7 @@ function spellInit(selector, thresholdPercent, button) {
 		var content = $this.val();
 			jQuery.ajax({
 				method: 'POST',
-				url: 'spellchecker.php',
+				url: 'spellcheck/spellchecker.php',
 					data: {
 						'article_text': content
 					},
