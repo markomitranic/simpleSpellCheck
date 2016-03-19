@@ -20,7 +20,7 @@ function spellInit(selector, thresholdPercent, button) {
 		if (isTimeouting === false) {
 		startTimeout(2000);
 		var that = this;
-		var $this = $(this);
+		var $this = jQuery(this);
 		if (customButton === false) {
 			var $submit = $this.closest('form').find('input[type="submit"]');
 		} else {
