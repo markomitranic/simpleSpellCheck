@@ -16,10 +16,12 @@ function spellInit(selector, thresholdPercent, button) {
 	var customButton = button || false;
 
 	jQuery(document).on('keydown', selector, function(){
+		console.log('OTKRIO SE');
 		if (isTimeouting === false) {
 		startTimeout(2000);
 		var that = this;
 		var $this = jQuery(this);
+		$this.css('background-color','red');
 
 		if (customButton === false) {
 			var $submit = $this.closest('form').find('input[type="submit"]');
