@@ -1,10 +1,9 @@
 jQuery(document).ready(function(){
-	spellInit('textarea', 20);
+	// spellInit('textarea', 20);
 
 
-	var button = jQuery('.mentions div').closest('button');
-	spellInit('.mentions div', 20, button);
-
+	
+	spellInit('.mentions div', 20, 'comments');
 
 
 });
@@ -23,8 +22,8 @@ function spellInit(selector, thresholdPercent, button) {
 		var $this = jQuery(this);
 		if (customButton === false) {
 			var $submit = $this.closest('form').find('input[type="submit"]');
-		} else {
-			var $submit = button;
+		} else if(customButton === 'comments') {
+			var button = $this.parent('.es-comments-form').find('button');
 		}
 		var content = $this.val();
 			jQuery.ajax({
