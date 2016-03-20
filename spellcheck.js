@@ -2,8 +2,10 @@ jQuery(document).ready(function(){
 	// spellInit('textarea', 20);
 
 
+	jQuery(document).on('click', function() {
+		spellInit('.mentions div', 20, 'comments');
+	});
 	
-	spellInit('.mentions div', 20, 'comments');
 
 
 });
