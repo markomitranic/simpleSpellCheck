@@ -2,7 +2,7 @@ jQuery(document).ready(function(){
 	// spellInit('textarea', 20);
 
 
-	spellInit('.mentions div', 20, 'comments');
+	spellInit('.es-story .mentions div', 20, 'comments');
 	
 
 
@@ -28,7 +28,7 @@ function spellInit(selector, thresholdPercent, button) {
 			var $submit = $this.parent('.es-comments-form').find('button');
 			var content = $this.val();
 		} else if (customButton === 'tinymce') {
-			var content = $this.val();
+			var content = selector.text();
 		}
 
 		
