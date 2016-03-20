@@ -2,9 +2,7 @@ jQuery(document).ready(function(){
 	// spellInit('textarea', 20);
 
 
-	jQuery(document).on('click', function() {
-		spellInit('.mentions div', 20, 'comments');
-	});
+	spellInit('.mentions div', 20, 'comments');
 	
 
 
@@ -22,12 +20,18 @@ function spellInit(selector, thresholdPercent, button) {
 		startTimeout(2000);
 		var that = this;
 		var $this = jQuery(this);
+
 		if (customButton === false) {
 			var $submit = $this.closest('form').find('input[type="submit"]');
-		} else if(customButton === 'comments') {
-			var button = $this.parent('.es-comments-form').find('button');
+			var content = $this.val();
+		} else if (customButton === 'comments') {
+			var $submit = $this.parent('.es-comments-form').find('button');
+			var content = $this.val();
+		} else if (customButton === 'tinymce') {
+			var content = $this.val();
 		}
-		var content = $this.val();
+
+		
 			jQuery.ajax({
 				method: 'POST',
 				url: 'spellcheck/spellchecker.php',
