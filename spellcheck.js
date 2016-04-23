@@ -27,7 +27,7 @@ function spellInit(selector, thresholdPercent) {
 		    type: 'POST',
 		    crossDomain: true,
 		    dataType: 'jsonp',
-		    success: ajaxSuccess(),
+		    success: function() { console.log('success'); ajaxSuccess(); },
 		    error: function() { alert('Failed!'); },
 		    beforeSend: setHeader
 		});
