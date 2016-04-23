@@ -30,7 +30,6 @@ function spellInit(selector, thresholdPercent) {
 					success: function(data){
 						var response = data;
 						var response = JSON.parse(data);
-						console.log(response);
 						var currentErrorPercent = calcPercent(response);
 						var isSubmitAllowed = checkResult(currentErrorPercent);
 						// Decide if should allow submit
