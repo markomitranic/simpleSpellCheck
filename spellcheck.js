@@ -21,7 +21,6 @@ function spellInit(selector, thresholdPercent) {
 		if (isTimeouting === false) {
 		// startTimeout(0);
 		var content = tinyMCE.activeEditor.getContent({ format: 'text' });
-		console.log(content);
 			jQuery.ajax({
 				type: 'POST',
 				url: 'https://app.engsocial.com/spellchecker.php',
@@ -71,7 +70,7 @@ function spellInit(selector, thresholdPercent) {
 
 	function calcPercent(response) {
 		if (response.wrong_words !== null) {
-		var result = (100 / response.all_words_count) * response.wrong_words.length;
+		var result = 100 * (response.all_words_count / response.wrong_words.length);
 		} else {
 		var result = 0;
 		}
