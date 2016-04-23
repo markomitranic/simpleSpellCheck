@@ -19,36 +19,38 @@ function spellInit(selector, thresholdPercent) {
 		startTimeout(2000);
 		var content = tinymce.textContent;
 		console.log(content);
-
-
-		$.ajax({
-		    url: 'https://app.engsocial.com/spellchecker.php',
-			data: { 'article_text': content },
-		    type: 'POST',
-		    crossDomain: true,
-		    dataType: 'jsonp',
-		    success: function(data){
-		    	console.log('USPEO');
-						var response = data;
-						var response = JSON.parse(data);
-						var currentErrorPercent = calcPercent(response);
-						var isSubmitAllowed = checkResult(currentErrorPercent);
-						// Decide if should allow submit
-						if(isSubmitAllowed) {
-							$submit.removeAttr('disabled');
-						} else {
-							$submit.attr('disabled', 'disabled');
-						}	
-						// Write out the errors
-						$this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
-					},
-		    error: function() { alert('Failed!'); },
-		    beforeSend: setHeader
-		});
-
-		
+			jQuery.ajax({
+				method: 'POST',
+		    	// type: 'POST',
+		    	crossDomain: true,
+		    	// dataType: 'jsonp',
+		    	beforeSend: setHeader
+				url: 'https://app.engsocial.com/spellchecker.php',
+				data: {
+					'article_text': content
+				},
+				success: function(data){
+					var response = data;
+					var response = JSON.parse(data);
+					var currentErrorPercent = calcPercent(response);
+					var isSubmitAllowed = checkResult(currentErrorPercent);
+					// Decide if should allow submit
+					if(isSubmitAllowed) {
+						$submit.removeAttr('disabled');
+					} else {
+						$submit.attr('disabled', 'disabled');
+					}	
+					// Write out the errors
+					$this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
+				}
+			});
 		}
 	});
+
+
+
+
+
 
 	function startTimeout(miliseconds) {
 		isTimeouting = true;
