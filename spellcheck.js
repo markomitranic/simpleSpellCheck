@@ -21,7 +21,7 @@ function spellInit(selector, thresholdPercent) {
 		if (isTimeouting === false) {
 		startTimeout(2000);
 		var content = tinyMCE.activeEditor.getContent({ format: 'text' });
-		console.log(tinymce.textContent);
+		console.log(content);
 			jQuery.ajax({
 				method: 'POST',
 				url: 'https://app.engsocial.com/spellchecker.php',
