@@ -21,10 +21,10 @@ function spellInit(selector, thresholdPercent) {
 			var content = 'Ja sam marko maleni';
 
 			jQuery.ajax({
-				//method: 'POST',
-		    	type: 'POST',
+				method: 'POST',
+		    	// type: 'POST',
 		    	crossDomain: true,
-		    	dataType: 'jsonp',
+		    	// dataType: 'jsonp',
 		    	beforeSend: setHeader,
 				url: 'https://app.engsocial.com/spellchecker.php',
 				data: {
