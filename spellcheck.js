@@ -16,34 +16,35 @@ function spellInit(selector, thresholdPercent) {
 
 	$(window).on('keydown', function() {
 		if (isTimeouting === false) {
-		startTimeout(2000);
-		// var content = tinymce.textContent;
-		var content = 'Ja sam marko maleni';
-		console.log(content);
+			startTimeout(2000);
+			// var content = tinymce.textContent;
+			var content = 'Ja sam marko maleni';
 
 			jQuery.ajax({
-				method: 'POST',
-		    	// type: 'POST',
+				//method: 'POST',
+		    	type: 'POST',
 		    	crossDomain: true,
-		    	// dataType: 'jsonp',
+		    	dataType: 'jsonp',
 		    	beforeSend: setHeader,
 				url: 'https://app.engsocial.com/spellchecker.php',
 				data: {
 					'article_text': content
 				},
 				success: function(data){
-					var response = data;
-					var response = JSON.parse(data);
-					var currentErrorPercent = calcPercent(response);
-					var isSubmitAllowed = checkResult(currentErrorPercent);
-					// Decide if should allow submit
-					if(isSubmitAllowed) {
-						$submit.removeAttr('disabled');
-					} else {
-						$submit.attr('disabled', 'disabled');
-					}	
-					// Write out the errors
-					$this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
+					console.log(data);
+					console.log('RADI!');
+					// var response = data;
+					// var response = JSON.parse(data);
+					// var currentErrorPercent = calcPercent(response);
+					// var isSubmitAllowed = checkResult(currentErrorPercent);
+					// // Decide if should allow submit
+					// if(isSubmitAllowed) {
+					// 	$submit.removeAttr('disabled');
+					// } else {
+					// 	$submit.attr('disabled', 'disabled');
+					// }	
+					// // Write out the errors
+					// $this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
 				}
 			});
 		}
