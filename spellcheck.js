@@ -14,7 +14,7 @@ function spellInit(selector, thresholdPercent) {
 	var threshold = thresholdPercent;
 	var isTimeouting = false;
 	var customButton = button || false;
-
+	console.log('stigo sam doovde');
 
 	$(document).on('keydown', function() {
 		console.log('MARKO');
