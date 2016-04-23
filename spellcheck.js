@@ -17,6 +17,8 @@ function spellInit(selector, thresholdPercent) {
 	appendSpellWarning(selector);
 	var threshold = thresholdPercent;
 	var isTimeouting = false;
+	console.log(tinymce);
+	
 
 	$(tinymce).on('keydown', function() {
 		if (isTimeouting === false) {
