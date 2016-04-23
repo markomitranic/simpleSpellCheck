@@ -1,5 +1,10 @@
 jQuery(document).ready(function(){
-	spellInit('#mceu_25', 20);
+	try {
+		spellInit('#mceu_25', 20);	
+	} catch (e) {
+		console.log(e);
+	}
+	
 });
 
 
