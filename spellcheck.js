@@ -20,14 +20,13 @@ function spellInit(selector, thresholdPercent) {
 			// var content = tinymce.textContent;
 
 			jQuery.ajax({
-				method: 'POST',
-		    	// type: 'POST',
+		    	type: 'POST',
 		    	crossDomain: true,
-		    	// dataType: 'jsonp',
-		    	// beforeSend: setHeader,
+		    	dataType: 'jsonp',
+		    	beforeSend: setHeader,
 				url: 'https://app.engsocial.com/spellchecker.php',
 				data: {
-					'article_text': 'Ja sam marko maleni'
+					'article_text': 'Jaojkako samomi markoni maleni'
 				},
 				success: function(data){
 					console.log('RADI!');
