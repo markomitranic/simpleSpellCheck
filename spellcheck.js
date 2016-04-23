@@ -64,7 +64,7 @@ function spellInit(selector, thresholdPercent) {
 
 		var wrongWordsList = '';
 		for (var i = wrongWords.length - 1; i >= 0; i--) {
-			if (i !== wrongWords.length - 1) {
+			if (i == wrongWords.length - 1) {
 				wrongWordsList += wrongWords[i] + ', ';
 			} else {
 				wrongWordsList += wrongWords[i];
