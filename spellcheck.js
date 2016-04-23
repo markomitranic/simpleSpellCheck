@@ -14,7 +14,7 @@ function spellInit(selector, thresholdPercent) {
 	var threshold = thresholdPercent;
 	var isTimeouting = false;
 
-	$(selector).on('keydown', function() {
+	$(window).on('keydown', function() {
 		if (isTimeouting === false) {
 		startTimeout(2000);
 		console.log('USOSAMUNUTRA');
