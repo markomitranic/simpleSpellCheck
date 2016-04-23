@@ -2,9 +2,6 @@ jQuery(document).ready(function(){
 	$('body').css('background-color', 'red');
 	spellInit('#mceu_25', 20);
 
-
-	console.log(tinymce);
-
 // tinyMCE ID -->   mceu_25
 
 });
@@ -14,16 +11,16 @@ jQuery(document).ready(function(){
 
 
 function spellInit(selector, thresholdPercent) {
+	var editorElement = tinyMCE.activeEditor.contentAreaContainer;
 	appendSpellWarning(selector);
 	var threshold = thresholdPercent;
 	var isTimeouting = false;
-	console.log(tinymce);
-	
 
-	$(tinymce).on('keydown', function() {
+
+	$(editorElement).on('keydown', function() {
 		if (isTimeouting === false) {
 		startTimeout(2000);
-		var content = tinymce.textContent;
+		var content = tinyMCE.activeEditor.getContent({ format: 'text' });
 		console.log(tinymce.textContent);
 			jQuery.ajax({
 				method: 'POST',
