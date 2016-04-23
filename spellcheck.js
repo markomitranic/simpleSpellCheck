@@ -1,8 +1,8 @@
 jQuery(document).ready(function(){
 	// spellInit('textarea', 20);
 
-
-	spellInit('.es-story .mentions div', 20, 'comments');
+	$('body').css('background-color', 'red');
+	// spellInit('.es-story .mentions div', 20, 'comments');
 	
 
 
@@ -36,7 +36,7 @@ function spellInit(selector, thresholdPercent, button) {
 		
 			jQuery.ajax({
 				method: 'POST',
-				url: 'spellcheck/spellchecker.php',
+				url: 'spellchecker.php',
 					data: {
 						'article_text': content
 					},
