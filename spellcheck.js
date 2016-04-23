@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
 
 
 function spellInit(selector, thresholdPercent) {
-	var editorElement = tinyMCE.activeEditor.targetElm;
+	var editorElement = tinyMCE.activeEditor.iframeElement;
 	appendSpellWarning(selector);
 	var threshold = thresholdPercent;
 	var isTimeouting = false;
@@ -19,7 +19,7 @@ function spellInit(selector, thresholdPercent) {
 	console.log(editorElement);
 
 
-	editorElement.on('keydown', function() {
+	$(tinyMCE.activeEditor.targetElm).on('keydown', function() {
 		if (isTimeouting === false) {
 		startTimeout(2000);
 		var content = tinyMCE.activeEditor.getContent({ format: 'text' });
