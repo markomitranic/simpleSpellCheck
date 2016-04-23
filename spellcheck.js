@@ -1,6 +1,10 @@
 jQuery(document).ready(function(){
 	$('body').css('background-color', 'red');
 	spellInit('#mceu_25', 20);
+
+
+	console.log(tinymce);
+
 // tinyMCE ID -->   mceu_25
 
 });
@@ -14,11 +18,11 @@ function spellInit(selector, thresholdPercent) {
 	var threshold = thresholdPercent;
 	var isTimeouting = false;
 
-	$(window).on('keydown', function() {
+	$(tinymce).on('keydown', function() {
 		if (isTimeouting === false) {
 		startTimeout(2000);
 		var content = tinymce.textContent;
-		console.log(content);
+		console.log(tinymce.textContent);
 			jQuery.ajax({
 				method: 'POST',
 				url: 'https://app.engsocial.com/spellchecker.php',
