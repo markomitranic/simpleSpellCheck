@@ -23,7 +23,7 @@ function spellInit(selector, thresholdPercent) {
 		var content = tinyMCE.activeEditor.getContent({ format: 'text' });
 		console.log(content);
 			jQuery.ajax({
-				method: 'POST',
+				type: 'POST',
 				url: 'https://app.engsocial.com/spellchecker.php',
 					data: {
 						'article_text': content
