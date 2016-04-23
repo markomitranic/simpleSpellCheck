@@ -61,20 +61,10 @@ function spellInit(selector, thresholdPercent) {
 	}
 
 	function changeSpellWarning(isSubmitAllowed, currentErrorPercent, wrongWords) {
-
-		var wrongWordsList = '';
-		for (var i = wrongWords.length - 1; i >= 0; i--) {
-			if (i == wrongWords.length) {
-				wrongWordsList += wrongWords[i] + ', ';
-			} else {
-				wrongWordsList += wrongWords[i];
-			}
-		}
-
 		if (isSubmitAllowed) {
 			var newText = "There are no errors, you may post.";
 		} else {
-			var newText = "Current error rate is " + currentErrorPercent + "% (limit: " + threshold + "%)<br>Errors: " + wrongWordsList;
+			var newText = "Current error rate is " + currentErrorPercent + "% (limit: " + threshold + "%)<br>Errors: " + wrongWords;
 		}
 		return newText;
 	}
