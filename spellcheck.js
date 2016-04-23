@@ -21,35 +21,35 @@ function spellInit(selector, thresholdPercent) {
 		console.log(content);
 
 
+		$.ajax({
+		    url: 'https://app.engsocial.com/spellchecker.php',
+			data: { 'article_text': content },
+		    type: 'POST',
+		    crossDomain: true,
+		    dataType: 'jsonp',
+		    success: ajaxSuccess(),
+		    error: function() { alert('Failed!'); },
+		    beforeSend: setHeader
+		});
 
-
-			jQuery.ajax({
-				method: 'POST',
-				contentType: 'text/plain',
-				xhrFields: { withCredentials: false },
-				headers: { },
-				url: 'https://app.engsocial.com/spellchecker.php',
-					data: {
-						'article_text': content
-					},
-					success: function(data){
-						var response = data;
-						var response = JSON.parse(data);
-						var currentErrorPercent = calcPercent(response);
-						var isSubmitAllowed = checkResult(currentErrorPercent);
-						// Decide if should allow submit
-						if(isSubmitAllowed) {
-							$submit.removeAttr('disabled');
-						} else {
-							$submit.attr('disabled', 'disabled');
-						}	
-						// Write out the errors
-						$this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
-					}
-			});
+		
 		}
 	});
 
+	function ajaxSuccess(data){
+		var response = data;
+		var response = JSON.parse(data);
+		var currentErrorPercent = calcPercent(response);
+		var isSubmitAllowed = checkResult(currentErrorPercent);
+		// Decide if should allow submit
+		if(isSubmitAllowed) {
+			$submit.removeAttr('disabled');
+		} else {
+			$submit.attr('disabled', 'disabled');
+		}	
+		// Write out the errors
+		$this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
+	}
 
 	function startTimeout(miliseconds) {
 		isTimeouting = true;
