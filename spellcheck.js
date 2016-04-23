@@ -19,7 +19,7 @@ function spellInit(selector, thresholdPercent) {
 	console.log(editorElement);
 
 
-	$(tinyMCE.activeEditor.targetElm).on('keydown', function() {
+	$(editorElement).on('keydown', function() {
 		if (isTimeouting === false) {
 		startTimeout(2000);
 		var content = tinyMCE.activeEditor.getContent({ format: 'text' });
