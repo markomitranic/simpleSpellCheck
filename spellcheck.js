@@ -17,14 +17,16 @@ function spellInit(selector, thresholdPercent) {
 	$(window).on('keydown', function() {
 		if (isTimeouting === false) {
 		startTimeout(2000);
-		var content = tinymce.textContent;
+		// var content = tinymce.textContent;
+		var content = 'Ja sam marko maleni';
 		console.log(content);
+
 			jQuery.ajax({
 				method: 'POST',
 		    	// type: 'POST',
 		    	crossDomain: true,
 		    	// dataType: 'jsonp',
-		    	beforeSend: setHeader
+		    	beforeSend: setHeader,
 				url: 'https://app.engsocial.com/spellchecker.php',
 				data: {
 					'article_text': content
