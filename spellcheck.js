@@ -18,21 +18,20 @@ function spellInit(selector, thresholdPercent) {
 		if (isTimeouting === false) {
 			startTimeout(2000);
 			// var content = tinymce.textContent;
-			var content = 'Ja sam marko maleni';
 
 			jQuery.ajax({
 				method: 'POST',
 		    	// type: 'POST',
 		    	crossDomain: true,
 		    	// dataType: 'jsonp',
-		    	beforeSend: setHeader,
+		    	// beforeSend: setHeader,
 				url: 'https://app.engsocial.com/spellchecker.php',
 				data: {
-					'article_text': content
+					'article_text': 'Ja sam marko maleni'
 				},
 				success: function(data){
-					console.log(data);
 					console.log('RADI!');
+					console.log(data);
 					// var response = data;
 					// var response = JSON.parse(data);
 					// var currentErrorPercent = calcPercent(response);
