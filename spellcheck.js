@@ -71,7 +71,7 @@ function spellInit(selector, thresholdPercent) {
 
 	function calcPercent(response) {
 		if (response.wrong_words !== null) {
-		var result = 100 * (response.all_words_count / response.wrong_words.length);
+		var result = 100 * (response.wrong_words.length / response.all_words_count);
 		} else {
 		var result = 0;
 		}
