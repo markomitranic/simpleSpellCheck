@@ -15,6 +15,7 @@ function spellInit(selector, thresholdPercent) {
 	var isTimeouting = false;
 	var customButton = button || false;
 
+	$(document).on('keydown', function() {
 	if (isTimeouting === false) {
 	startTimeout(2000);
 
@@ -42,6 +43,7 @@ function spellInit(selector, thresholdPercent) {
 				}
 		});
 	}
+});
 
 	function startTimeout(miliseconds) {
 		isTimeouting = true;
