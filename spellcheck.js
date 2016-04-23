@@ -11,13 +11,15 @@ jQuery(document).ready(function(){
 
 
 function spellInit(selector, thresholdPercent) {
-	var editorElement = tinyMCE.activeEditor.contentAreaContainer;
+	var editorElement = tinyMCE.activeEditor.targetElm;
 	appendSpellWarning(selector);
 	var threshold = thresholdPercent;
 	var isTimeouting = false;
 
+	console.log(editorElement);
 
-	$(window).on('keydown', function() {
+
+	editorElement.on('keydown', function() {
 		if (isTimeouting === false) {
 		startTimeout(2000);
 		var content = tinyMCE.activeEditor.getContent({ format: 'text' });
@@ -31,6 +33,7 @@ function spellInit(selector, thresholdPercent) {
 					success: function(data){
 						var response = data;
 						var response = JSON.parse(data);
+						console.log(response);
 						var currentErrorPercent = calcPercent(response);
 						var isSubmitAllowed = checkResult(currentErrorPercent);
 						// Decide if should allow submit
