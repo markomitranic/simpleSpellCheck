@@ -1,13 +1,6 @@
 jQuery(document).ready(function(){
-	$('body').css('background-color', 'red');
 	spellInit('#mceu_25', 20);
-
-// tinyMCE ID -->   mceu_25
-
 });
-
-
-
 
 
 function spellInit(selector, thresholdPercent) {
