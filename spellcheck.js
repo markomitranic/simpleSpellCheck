@@ -19,7 +19,7 @@ function spellInit(selector, thresholdPercent) {
 	startTimeout(2000);
 
 	var content = selector.text();
-	
+	console.log(content);
 		jQuery.ajax({
 			method: 'POST',
 			url: 'spellchecker.php',
