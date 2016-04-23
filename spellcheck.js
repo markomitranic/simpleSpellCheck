@@ -17,12 +17,11 @@ function spellInit(selector, thresholdPercent) {
 	$(window).on('keydown', function() {
 		if (isTimeouting === false) {
 		startTimeout(2000);
-		console.log('USOSAMUNUTRA');
-		var content = tinymce.textContent;;
+		var content = tinymce.textContent;
 		console.log(content);
 			jQuery.ajax({
 				method: 'POST',
-				url: 'spellchecker.php',
+				url: 'https://app.engsocial.com/spellchecker.php',
 					data: {
 						'article_text': content
 					},
