@@ -27,7 +27,21 @@ function spellInit(selector, thresholdPercent) {
 		    type: 'POST',
 		    crossDomain: true,
 		    dataType: 'jsonp',
-		    success: function() { console.log('success'); ajaxSuccess(); },
+		    success: function(data){
+		    	console.log('USPEO');
+						var response = data;
+						var response = JSON.parse(data);
+						var currentErrorPercent = calcPercent(response);
+						var isSubmitAllowed = checkResult(currentErrorPercent);
+						// Decide if should allow submit
+						if(isSubmitAllowed) {
+							$submit.removeAttr('disabled');
+						} else {
+							$submit.attr('disabled', 'disabled');
+						}	
+						// Write out the errors
+						$this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
+					},
 		    error: function() { alert('Failed!'); },
 		    beforeSend: setHeader
 		});
@@ -35,21 +49,6 @@ function spellInit(selector, thresholdPercent) {
 		
 		}
 	});
-
-	function ajaxSuccess(data){
-		var response = data;
-		var response = JSON.parse(data);
-		var currentErrorPercent = calcPercent(response);
-		var isSubmitAllowed = checkResult(currentErrorPercent);
-		// Decide if should allow submit
-		if(isSubmitAllowed) {
-			$submit.removeAttr('disabled');
-		} else {
-			$submit.attr('disabled', 'disabled');
-		}	
-		// Write out the errors
-		$this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
-	}
 
 	function startTimeout(miliseconds) {
 		isTimeouting = true;
