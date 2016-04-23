@@ -17,7 +17,7 @@ function spellInit(selector, thresholdPercent) {
 	$(selector).on('keydown', function() {
 		if (isTimeouting === false) {
 		startTimeout(2000);
-
+		console.log('USOSAMUNUTRA');
 		var content = tinymce.textContent;;
 		console.log(content);
 			jQuery.ajax({
