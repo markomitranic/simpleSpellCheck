@@ -12,13 +12,14 @@ jQuery(document).ready(function(){
 
 function spellInit(selector, thresholdPercent) {
 	var editorElement = tinyMCE.activeEditor.iframeElement;
+	var submit = $('button[type=submit]');
 	appendSpellWarning(selector);
 	var threshold = thresholdPercent;
 	var isTimeouting = false;
 
 	$(document).on('keydown', function() {
 		if (isTimeouting === false) {
-		startTimeout(2000);
+		startTimeout(1000);
 		var content = tinyMCE.activeEditor.getContent({ format: 'text' });
 		console.log(content);
 			jQuery.ajax({
@@ -32,15 +33,14 @@ function spellInit(selector, thresholdPercent) {
 						var response = JSON.parse(data);
 						var currentErrorPercent = calcPercent(response);
 						var isSubmitAllowed = checkResult(currentErrorPercent);
-						console.log(isSubmitAllowed);
 						// Decide if should allow submit
 						if(isSubmitAllowed) {
-							$submit.removeAttr('disabled');
+							submit.removeAttr('disabled');
 						} else {
-							$submit.attr('disabled', 'disabled');
+							submit.attr('disabled', 'disabled');
 						}	
 						// Write out the errors
-						$this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
+						$(selector).next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
 					}
 			});
 		}
