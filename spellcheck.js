@@ -13,7 +13,6 @@ function spellInit(selector, thresholdPercent) {
 	appendSpellWarning(selector);
 	var threshold = thresholdPercent;
 	var isTimeouting = false;
-	var customButton = button || false;
 	console.log('stigo sam doovde');
 
 	$(document).on('keydown', function() {
@@ -62,7 +61,8 @@ function spellInit(selector, thresholdPercent) {
 			'text': "There are no errors, you may post.",
 			'class': "spellWarning"
 		}).insertAfter(selector);
-		return element;
+	console.log('unutra sam zavrsio sve');
+
 	}
 
 	function changeSpellWarning(isSubmitAllowed, currentErrorPercent, wrongWords) {
