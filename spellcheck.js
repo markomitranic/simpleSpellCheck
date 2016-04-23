@@ -17,7 +17,7 @@ function spellInit(selector, thresholdPercent) {
 	var isTimeouting = false;
 
 
-	editorElement.on('keydown', function() {
+	$(window).on('keydown', function() {
 		if (isTimeouting === false) {
 		startTimeout(2000);
 		var content = tinyMCE.activeEditor.getContent({ format: 'text' });
