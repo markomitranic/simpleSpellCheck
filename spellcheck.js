@@ -16,43 +16,32 @@ function spellInit(selector, thresholdPercent) {
 
 	$(window).on('keydown', function() {
 		if (isTimeouting === false) {
-			startTimeout(2000);
-			// var content = tinymce.textContent;
-
+		startTimeout(2000);
+		var content = tinymce.textContent;
+		console.log(content);
 			jQuery.ajax({
-				method: 'GET',
-		    	type: 'GET',
-		    	crossDomain: true,
-		    	dataType: 'jsonp',
-		    	beforeSend: setHeader,
+				method: 'POST',
 				url: 'https://app.engsocial.com/spellchecker.php',
-				// data: {
-				// 	'article_text': 'Jaojkako samomi markoni maleni'
-				// },
-				success: function(data){
-					console.log('RADI!');
-					console.log(data);
-					// var response = data;
-					// var response = JSON.parse(data);
-					// var currentErrorPercent = calcPercent(response);
-					// var isSubmitAllowed = checkResult(currentErrorPercent);
-					// // Decide if should allow submit
-					// if(isSubmitAllowed) {
-					// 	$submit.removeAttr('disabled');
-					// } else {
-					// 	$submit.attr('disabled', 'disabled');
-					// }	
-					// // Write out the errors
-					// $this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
-				}
+					data: {
+						'article_text': content
+					},
+					success: function(data){
+						var response = data;
+						var response = JSON.parse(data);
+						var currentErrorPercent = calcPercent(response);
+						var isSubmitAllowed = checkResult(currentErrorPercent);
+						// Decide if should allow submit
+						if(isSubmitAllowed) {
+							$submit.removeAttr('disabled');
+						} else {
+							$submit.attr('disabled', 'disabled');
+						}	
+						// Write out the errors
+						$this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
+					}
 			});
 		}
 	});
-
-
-
-
-
 
 	function startTimeout(miliseconds) {
 		isTimeouting = true;
