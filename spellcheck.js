@@ -19,29 +19,64 @@ function spellInit(selector, thresholdPercent) {
 		startTimeout(2000);
 		var content = tinymce.textContent;
 		console.log(content);
-			jQuery.ajax({
-				method: 'POST',
-				url: 'https://app.engsocial.com/spellchecker.php',
-					data: {
-						'article_text': content
-					},
-					success: function(data){
-						var response = data;
-						var response = JSON.parse(data);
-						var currentErrorPercent = calcPercent(response);
-						var isSubmitAllowed = checkResult(currentErrorPercent);
-						// Decide if should allow submit
-						if(isSubmitAllowed) {
-							$submit.removeAttr('disabled');
-						} else {
-							$submit.attr('disabled', 'disabled');
-						}	
-						// Write out the errors
-						$this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
-					}
-			});
+
+
+		var xhr = createCORSRequest('POST', 'https://app.engsocial.com/spellchecker.php');
+		if (!xhr) {
+		  throw new Error('CORS not supported');
+		}
+		console.log(xhr);
+
+
+
+			// jQuery.ajax({
+			// 	method: 'POST',
+			// 	url: 'https://app.engsocial.com/spellchecker.php',
+			// 		data: {
+			// 			'article_text': content
+			// 		},
+			// 		success: function(data){
+			// 			var response = data;
+			// 			var response = JSON.parse(data);
+			// 			var currentErrorPercent = calcPercent(response);
+			// 			var isSubmitAllowed = checkResult(currentErrorPercent);
+			// 			// Decide if should allow submit
+			// 			if(isSubmitAllowed) {
+			// 				$submit.removeAttr('disabled');
+			// 			} else {
+			// 				$submit.attr('disabled', 'disabled');
+			// 			}	
+			// 			// Write out the errors
+			// 			$this.next().html(changeSpellWarning(isSubmitAllowed, currentErrorPercent, response.wrong_words));
+			// 		}
+			// });
 		}
 	});
+
+
+	function createCORSRequest(method, url) {
+	  var xhr = new XMLHttpRequest();
+	  if ("withCredentials" in xhr) {
+
+	    // Check if the XMLHttpRequest object has a "withCredentials" property.
+	    // "withCredentials" only exists on XMLHTTPRequest2 objects.
+	    xhr.open(method, url, true);
+
+	  } else if (typeof XDomainRequest != "undefined") {
+
+	    // Otherwise, check if XDomainRequest.
+	    // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+	    xhr = new XDomainRequest();
+	    xhr.open(method, url);
+
+	  } else {
+
+	    // Otherwise, CORS is not supported by the browser.
+	    xhr = null;
+
+	  }
+	  return xhr;
+	}
 
 	function startTimeout(miliseconds) {
 		isTimeouting = true;
